@@ -1,0 +1,49 @@
+/* 按钮CSS */
+.vul-button{
+    display: inline-block;
+    margin-left: 10px;
+}
+.vul-button .el-button--primary{
+    background-color: rgba(86,159,227,1) !important;
+}
+.vul-button .el-button--default {
+    color: #7F7F7F !important;
+    border: 1px solid rgba(204,204,204,1) !important;
+}
+.vul-button .el-button--default:hover{
+    border: 1px solid #0E76D7 !important;
+    color: #0E76D7 !important;
+}
+
+.vul-button .el-button--default.is-plain {
+    color: #0E76D7 !important;
+    border:1px solid rgba(14,118,215,1) !important;
+}
+.vul-button .el-button--default.is-plain:hover{
+    background-color: #0E76D7 !important;
+    color: #fff !important;
+}
+/* 表格css */
+.has-gutter > tr > th {
+    border-right: 1px solid #E0E0E0;
+}
+/* 抽屉css */
+.el-drawer__header{
+    padding: 10px 10px 10px 20px;
+    margin-bottom: 20px;
+    background-color: #F5F5F5;
+    color: #343434;
+    font-weight: 400;
+}
+.el-drawer__close-btn{
+    font-size: 15px !important;
+}
+.el-drawer__body{
+    padding: 0px 20px 20px 20px;
+}
+.demo-drawer__footer{
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    margin: 40px;
+}

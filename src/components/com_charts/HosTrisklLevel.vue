@@ -1,0 +1,146 @@
+<template>
+  <div class="com">
+    <p class="part-title">
+      <span>{{title}}</span>
+    </p>
+    <div class="chart" ref="chart"></div>
+    <div class="no-data" v-if="chartData.length == 0">暂无数据</div>
+  </div>
+</template>
+<style lang="scss" scoped>
+.com {
+  width: 100%;
+  height: 100%;
+}
+</style>
+
+
+<script>
+import config from "../com_charts/charts_config";
+let { tooltip, dataZoom, lineStyle, getRem } = config;
+
+export default {
+  props: ["chartData"],
+  data() {
+    return {
+      title: "资产风险等级分布",
+      colorList1: [
+        "rgba(244, 132, 124,1)",
+        "rgba(255, 237, 127,1)",
+        "rgba(125, 185, 255,1)",
+        "rgba(149, 207, 161,1)",
+      ],
+    };
+  },
+  methods: {
+    initChart() {
+      const chart = this.$echarts.init(this.$refs.chart);
+      let me = this;
+      let option = {
+        color: this.colorList1,
+        tooltip: tooltip[0],
+        legend: {
+          orient: "vertical",
+          right: "3%",
+          top: "center",
+          icon: "react",
+          height: "100%",
+          itemWidth: getRem(16),
+          itemHeight: getRem(11),
+          itemGap: getRem(30),
+          textStyle: {
+            color: "#808080",
+            fontSize: getRem(19),
+            rich: {
+              name: {
+                padding: [0, 0, 0, 5],
+                fontSize: getRem(19),
+                width: getRem(150),
+                align: "left",
+              },
+              value: {
+                fontSize: getRem(19),
+                width: getRem(70),
+                align: "right",
+              },
+            },
+          },
+          formatter(name) {
+            let data = option.series[0].data;
+            let num = 0;
+            let cur_nums = 0;
+            for (let i = 0; i < data.length; i++) {
+              if (name == data[i].name) {
+                cur_nums = data[i].value;
+              }
+            }
+            num =
+              "{name|" +
+              name +
+              "}" +
+              "{value|" +
+              "【" +
+              cur_nums +
+              "个" +
+              "】" +
+              "}";
+            return num;
+          },
+        },
+        series: [
+          {
+            name: "",
+            type: "pie",
+            roseType: "radius",
+            radius: ["35%", "60%"],
+            center: ["23%", "50%"],
+            avoidLabelOverlap: false,
+            //   hoverAnimation: false,
+            color: me.colorList1,
+            label: {
+              normal: {
+                padding: [5, 0, 0, 0],
+                textStyle: {
+                  color: "#666666",
+                  fontSize: getRem(16),
+                  lineHeight: getRem(30),
+                },
+                formatter: function () {
+                  return `${me.chartData[0].name}\n${me.chartData[0].value}个`;
+                },
+                position: "center",
+                show: true,
+              },
+            },
+            // 显示文字
+            emphasis: {
+              label: {
+                show: false,
+              },
+            },
+            labelLine: {
+              show: false,
+            },
+            data: this.chartData.slice(1),
+          },
+        ],
+      };
+      chart.setOption(option);
+      window.addEventListener("resize", () => {
+        chart.resize();
+      });
+    },
+  },
+  mounted() {
+    this.initChart()
+  },
+  watch: {
+    chartData(a, b) {
+      console.log('ab', this.chartData)
+      if (a != b) {
+        this.initChart();
+      }
+    },
+  },
+};
+</script>
