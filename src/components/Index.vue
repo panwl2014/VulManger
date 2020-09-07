@@ -241,6 +241,7 @@ export default {
       }
     });
   },
+  
   created() {
     this.curUrl = this.$route.path == "/" ? "/home/vulAnalysis" : this.$route.path;
     if (this.$route.path == "/") {
@@ -249,6 +250,7 @@ export default {
     // if (typeof(this.$session.get('username')) === 'undefined') {
     //   this.$router.push('/index.html#/login')
     // }
+
     const url = "/menu/loadIndexLeftMenuJson";
     this.axios
       .get(url)
@@ -288,7 +290,7 @@ export default {
         // this.$router.push(d.data[0]["children"][0]["target"]);
       })
       .catch((error) => {
-        console.log("Cookie失效");
+        console.log("Cookie失效", error);
         window.location.href = "/index.html#/login";
       });
   },

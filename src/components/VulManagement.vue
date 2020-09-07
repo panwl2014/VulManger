@@ -495,6 +495,7 @@ export default {
       document.getElementsByTagName("html")[0].style.fontSize = em + "px";
     }),
       this.axios.get("/riskBigScreen/findFlawDistributed").then(({ data }) => {
+        console.log('allall',data)
         let arr = [];
         data.data.forEach((item, index) => {
           let colorIndex;
@@ -523,11 +524,10 @@ export default {
         this.chartData = arr.sort((a, b) => {
           return b.score - a.score;
         });
-
-        console.log("test3", this.chartData);
       });
 
     this.axios.get("/riskBigScreen/loadOverall").then(({ data }) => {
+      console.log('time',data)
       this.nearImprotTime =
         new Date(Number(data.data.recentDate))
           .toLocaleDateString()

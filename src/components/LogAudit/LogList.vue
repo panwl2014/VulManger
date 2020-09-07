@@ -38,6 +38,7 @@
       :before-close="handleClose">
       <span>
         <el-date-picker
+        is-range
           v-model="date"
           type="daterange"
           unlink-panels
@@ -49,8 +50,8 @@
         </el-date-picker>
       </span>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="loadAll">确 定</el-button>
+        <el-button @click="dialogVisible = false">取 消</el-button>
       </span>
     </el-dialog>
   </div>
@@ -185,12 +186,13 @@ export default {
       let url = '/loginfo/logPigeonhole'
       this.axios.post(url, this.qs.stringify(data)).then((Response) => {
         const d = Response.data
-        console.log(d)
-        if (d.code === 0) {
-          this.message_box('导出文件成功：' + d.data[0].fileName)
+        if (d.code === 200) {
+          this.message_box('归档成功')
+          // this.message_box('导出文件成功' + d.data[0].fileName)
           this.cancle()
           this.search()
         } else {
+          console.log( 'dddd',d)
           this.$message.error(d.msg)
         }
       })

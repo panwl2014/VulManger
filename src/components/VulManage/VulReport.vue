@@ -27,6 +27,7 @@
                   v-model="FilterForm[i.name]"
                   type="daterange"
                   unlink-panels
+                  is-range
                   :clearable="false"
                   range-separator="至"
                   start-placeholder="开始日期"

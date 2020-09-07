@@ -30,6 +30,7 @@
             </template>
             <template v-else-if="i.type === 'date'">
               <el-date-picker
+              is-range
                 v-model="FilterForm[i.name]"
                 type="daterange"
                 unlink-panels

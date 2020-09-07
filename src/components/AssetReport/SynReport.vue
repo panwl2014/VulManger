@@ -38,11 +38,12 @@
         >
           <el-input placeholder="请输入资产名称（ip或网址）" v-model="reportData.assetRange"></el-input>
         </el-form-item>
-        <el-form-item
-          v-else-if="reportData.assetType == 2"
-          prop="deptId"
-        >
-          <el-select placeholder="请选择" v-model="reportData.assetRange" :rules="[{required: true, message: '请选择部门', trigger: 'blur'}]">
+        <el-form-item v-else-if="reportData.assetType == 2" prop="deptId">
+          <el-select
+            placeholder="请选择"
+            v-model="reportData.assetRange"
+            :rules="[{required: true, message: '请选择部门', trigger: 'blur'}]"
+          >
             <el-option
               v-for="(item, index) in deptList"
               :key="index"
@@ -53,6 +54,7 @@
         </el-form-item>
         <el-form-item width="100%" prop="importStartTime">
           <el-date-picker
+            is-range
             width="100%"
             v-model="importStartEndTime"
             type="daterange"
@@ -136,7 +138,9 @@ export default {
                 .replace(/\//g, "-") + " 23:59:59";
             this.reportData.deptId = this.deptId;
             this.reportData.flawType = this.reportData.flawType.join(",");
-            this.reportData.handleStatus = this.reportData.handleStatus.join(",");
+            this.reportData.handleStatus = this.reportData.handleStatus.join(
+              ","
+            );
             let data = this.qs.stringify(this.reportData);
             this.axios
               .post("/report/addSyntheticalReport", data)
@@ -154,7 +158,7 @@ export default {
                 }
               });
           } else {
-            this.$message.error('请选择日期');
+            this.$message.error("请选择日期");
           }
         }
       });

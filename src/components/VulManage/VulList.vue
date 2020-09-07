@@ -49,6 +49,7 @@
                 <el-date-picker
                   v-model="FilterForm[i.name]"
                   type="daterange"
+                  is-range
                   unlink-panels
                   :clearable="false"
                   range-separator="至"

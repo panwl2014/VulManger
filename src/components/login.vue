@@ -243,6 +243,7 @@ export default {
         this.axios
           .post(url, "loginname=" + loginname + "&pwd=" + pwd)
           .then(({ data }) => {
+            console.log('111login')
             this.$session.set('username', loginname)
             if (data.code == 200) {
               this.$message({

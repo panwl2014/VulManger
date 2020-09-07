@@ -19,7 +19,7 @@
           <span
             class="num"
             :style="{color: addReduce  == 0 ? '#FABF3E': '#53f64c'}"
-          >{{percentage + '%'}}</span>
+          >{{ percentage + '%' ? percentage + '%' : 0 + '%'}}</span>
           <img
             class="icon"
             :src="require(`../../../static/imgs/vul_management_imgs/icon_${addReduce == 0 ? 'add': 'reduce'}.png`)"
@@ -306,7 +306,7 @@ export default {
             detail: {
               formatter: function (value) {
                 var num = Math.round(value);
-                return "{bule|" + num + "}{white|分}";
+                return "{bule|" + (num ? num : 0) + "}{white|分}";
               },
               rich: rich,
               offsetCenter: ["0%", "0%"],

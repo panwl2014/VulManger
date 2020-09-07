@@ -520,8 +520,22 @@ export default {
   },
   created() {
     // 数据初始化
+    console.log("listdata", this.display.flawSouceList);
+    console.log("listdata1", this.display.flawSouceList);
+
+    let mapData = {
+      moan: "(xls、xlsx)",
+      nsfocus_web: "(docx、doc)",
+      nusass: "(csv)",
+      nsfocus: "(zip、rar)",
+      tianjin: "(zip、rar)",
+    };
+
     for (let key in this.display.flawSouceList) {
       if (key !== "manual") {
+        this.display.flawSouceList[key].label =
+          this.display.flawSouceList[key].label +
+          mapData[this.display.flawSouceList[key].value];
         this.souceList.push(this.display.flawSouceList[key]);
       }
     }

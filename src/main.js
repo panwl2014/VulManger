@@ -46,6 +46,12 @@ Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 })
 
+import { Encrypt, Decrypt } from "./assets/js/AES";
+
+let a = '1236';
+let b = Encrypt(a);
+console.log(Encrypt(a)); 
+
 // axios.post('/login/login', 'loginname=system&pwd=b123456').then((response) => {
 //   console.log(response.data)
 // }).catch((responese) => {
